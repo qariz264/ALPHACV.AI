@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Base custom resets */
+body {
+  font-family: var(--font-sans);
+  background: #0f172a; /* Sleek dark-blue SaaS theme */
+  color: #f1f5f9;
+}
+
+/* Custom Hide Scrollbar for clean preview panels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================
+   HIGH-FIDELITY CSS PRINTING RULES
+   ========================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm 15mm 15mm 15mm;
+  }
+
+  /* Hide the entire viewport except the resume document wrapper */
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+  }
+  
+  /* Hide all dashboard navigation, sidebar panels, floating action bars, background gradients, and modals */
+  #main-layout-root, 
+  #editor-sidebar-panel, 
+  #builder-navigation-header, 
+  #custom-paywall-modal,
+  #sandbox-checkout-panel,
+  #landing-root-view,
+  #dashboard-root-view,
+  button, 
+  nav, 
+  footer,
+  aside {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+  }
+  
+  /* Force exclusive visibility on the print target zone */
+  #print-resume-area-container,
+  #print-resume-area-container * {
+    visibility: visible !important;
+  }
+  
+  #print-resume-area-container {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    z-index: 9999999 !important;
+    background: #ffffff !important;
+  }
+
+  /* Prevent height restrictions and scrollbars on container blocks to let them expand across page boundaries */
+  #print-resume-area-container,
+  #print-resume-area-container div,
+  #print-resume-area-container main,
+  #print-resume-area-container section {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Force page break avoidance inside concrete item entries so they don't fracture across physical pages */
+  #print-resume-area-container [id^="exp-"],
+  #print-resume-area-container [id^="edu-"],
+  #print-resume-area-container [id^="proj-"],
+  #print-resume-area-container .group,
+  #print-resume-area-container li,
+  #print-resume-area-container .space-y-4 > div,
+  #print-resume-area-container .space-y-5 > div,
+  #print-resume-area-container .space-y-3.5 > div {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Keep headings with their corresponding content nodes (prevent orphaned subheadings/categories at page bottom) */
+  #print-resume-area-container h1,
+  #print-resume-area-container h2,
+  #print-resume-area-container h3,
+  #print-resume-area-container h4 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Ensure double-column layouts let their right side and sidebars wrap and extend seamlessly */
+  #print-resume-area-container .flex {
+    flex-wrap: wrap !important;
+    height: auto !important;
+  }
+
+  #print-resume-area-container .w-\[30\%\],
+  #print-resume-area-container .w-\[32\%\] {
+    width: 30% !important;
+    min-height: 100% !important;
+  }
+
+  #print-resume-area-container .w-\[70\%\],
+  #print-resume-area-container .flex-1 {
+    width: 70% !important;
+    flex-grow: 1 !important;
+  }
+}

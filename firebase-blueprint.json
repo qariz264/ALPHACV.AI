@@ -1,0 +1,131 @@
+{
+  "entities": {
+    "Resume": {
+      "title": "Resume",
+      "description": "User resume containing personal data, AI generated and optimized bullet points, custom parameters, and paid status.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the owning user"
+        },
+        "title": {
+          "type": "string",
+          "description": "Name or title of the CV"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "User's full name"
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "location": {
+          "type": "string",
+          "description": "City and country"
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "Target job title of the resume"
+        },
+        "workExperienceText": {
+          "type": "string",
+          "description": "Rough description of user work experience input"
+        },
+        "workExperience": {
+          "type": "array",
+          "description": "Array of enhanced work experiences with refined bullet points"
+        },
+        "education": {
+          "type": "array",
+          "description": "Array of candidate institutions, qualifications, and dates"
+        },
+        "skills": {
+          "type": "array",
+          "description": "Array of specialized professional skills"
+        },
+        "selectedTemplate": {
+          "type": "string",
+          "description": "Active resume layout template"
+        },
+        "hasPaid": {
+          "type": "boolean",
+          "description": "Flag indicating if download paywall has been unlocked"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp"
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "fullName",
+        "hasPaid",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Paystack payment records for CV unlocking.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "UID of the user who initiated the transaction"
+        },
+        "resumeId": {
+          "type": "string",
+          "description": "ID of the resume unlocked by this transaction"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Unique Paystack payment reference"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Paid transaction amount (e.g. 100 KES)"
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status, e.g. success, pending, failed"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": [
+        "userId",
+        "resumeId",
+        "reference",
+        "amount",
+        "status",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/resumes/{resumeId}": {
+      "schema": "Resume",
+      "description": "Primary document for individual user resumes"
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Paystack transactions logs for monetization audits"
+    }
+  }
+}

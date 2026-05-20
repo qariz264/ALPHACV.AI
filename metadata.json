@@ -1,0 +1,6 @@
+{
+  "name": "AlphaCV AI",
+  "description": "AI-powered resume and CV generator with professional, ATS-optimized templates.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
